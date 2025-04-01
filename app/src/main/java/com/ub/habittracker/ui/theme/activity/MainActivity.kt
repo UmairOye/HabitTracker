@@ -1,4 +1,4 @@
-package com.ub.habittracker
+package com.ub.habittracker.ui.theme.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
