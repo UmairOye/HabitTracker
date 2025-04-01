@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HabitTracker</string>
+    <string name="lock">lock</string>
+    <string name="password">***********</string>
+    <string name="email_icon">email_icon</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="sign_in">Sign In</string>
 </resources>
