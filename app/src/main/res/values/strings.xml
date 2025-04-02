@@ -11,4 +11,9 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="else_">else</string>
     <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_up_to_create_new_account">Sign up to create new account</string>
+    <string name="username">username</string>
+    <string name="password_">Password</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

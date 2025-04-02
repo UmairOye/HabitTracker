@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
@@ -40,14 +42,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ub.habittracker.R
-import com.ub.habittracker.ui.theme.composables.CheckBox
+import com.ub.habittracker.ui.theme.composables.BackButton
 
 @Composable
 @Preview
@@ -61,6 +63,14 @@ fun SignUpScreen(){
         mutableStateOf("")
     }
 
+    var confirmPassword by remember {
+        mutableStateOf("")
+    }
+
+    var name by remember {
+        mutableStateOf("")
+    }
+
     Scaffold { innerPadding ->
 
         Column(modifier = Modifier
@@ -70,13 +80,9 @@ fun SignUpScreen(){
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top) {
 
-
-            Text(text = stringResource(R.string.sign_up),
-                fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
-                fontSize = 22.sp,
-                color = colorResource(id = R.color.text_color),
-                textAlign = TextAlign.Center
-            )
+            BackButton(color = colorResource(id = R.color.blue_color),
+                heading = stringResource(R.string.sign_up)) {
+            }
 
             Card(
                 colors = CardDefaults.cardColors(
@@ -94,7 +100,7 @@ fun SignUpScreen(){
                     .wrapContentHeight()
             ) {
 
-                Text(text = stringResource(R.string.welcome_back),
+                Text(text = stringResource(R.string.create_account),
                     color = colorResource(id = R.color.blue_color),
                     fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
                     fontSize = 18.sp,
@@ -103,13 +109,45 @@ fun SignUpScreen(){
                         .padding(top = 25.dp),
                     textAlign = TextAlign.Center)
 
-                Text(text = stringResource(R.string.sign_in_to_continue),
+                Text(text = stringResource(R.string.sign_up_to_create_new_account),
                     color = Color.Gray,
                     fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
                     fontSize = 12.sp,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center)
 
+
+
+                TextField(value = name, onValueChange = {username -> name = username},
+                    placeholder = {
+                        Text(
+                            text = stringResource(R.string.username),
+                            style = TextStyle(color = MaterialTheme.colorScheme.onBackground),
+                            fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
+                            color = Color.Gray
+                        )
+                    },
+
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_color),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_color),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    ), singleLine = true, leadingIcon = {
+                        Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = stringResource(R.string.email_icon),
+                            tint = colorResource(id = R.color.blue_color)
+                        )
+                    },
+
+                    shape = RoundedCornerShape(13.dp),
+
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = 16.dp,
+                            end = 16.dp, start = 16.dp
+                        )
+                )
 
 
                 TextField(value = emailValue, onValueChange = {email -> emailValue = email},
@@ -148,7 +186,7 @@ fun SignUpScreen(){
                 TextField(value = passwordValue, onValueChange = {password -> passwordValue = password},
                     placeholder = {
                         Text(
-                            text = stringResource(R.string.password),
+                            text = stringResource(R.string.password_),
                             style = TextStyle(color = MaterialTheme.colorScheme.onBackground),
                             fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
                             color = Color.Gray
@@ -167,6 +205,7 @@ fun SignUpScreen(){
                     },
 
                     shape = RoundedCornerShape(13.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
 
                     modifier = Modifier
                         .fillMaxWidth()
@@ -177,44 +216,37 @@ fun SignUpScreen(){
                 )
 
 
-                Row (verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
+                TextField(value = confirmPassword, onValueChange = {password -> confirmPassword = password},
+                    placeholder = {
+                        Text(
+                            text = stringResource(R.string.confirm_password),
+                            style = TextStyle(color = MaterialTheme.colorScheme.onBackground),
+                            fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
+                            color = Color.Gray
+                        )
+                    },
+
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_color),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_color),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    ), singleLine = true, leadingIcon = {
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.lock),
+                            tint = colorResource(id = R.color.blue_color)
+                        )
+                    },
+
+                    shape = RoundedCornerShape(13.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+
                     modifier = Modifier
-                        .padding(top = 8.dp, start = 16.dp, end = 16.dp)
-                        .fillMaxWidth()){
-
-//                    CheckBox(modifier = Modifier, checked = rememberMe, onClick = { isChecked->
-//                        rememberMe = isChecked
-//                    })
-
-                    Text(text = stringResource(R.string.remember_me),
-                        fontFamily = FontFamily(
-                            Font(
-                                R.font.roboto_regular,
-                            FontWeight.Normal)
-                        ),
-                        fontSize = 12.sp,
-                        color = colorResource(id = R.color.text_color),
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .padding(start = 8.dp))
-
-
-                    Text(text = stringResource(R.string.forgot_password),
-                        color = colorResource(id = R.color.blue_color),
-                        fontFamily = FontFamily(
-                            Font(
-                                R.font.roboto_regular,
-                            FontWeight.Normal)
-                        ),
-                        fontSize = 12.sp,
-                        textAlign = TextAlign.End,
-                        fontStyle = FontStyle.Italic,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp))
-                }
-
+                        .fillMaxWidth()
+                        .padding(
+                            top = 16.dp,
+                            end = 16.dp, start = 16.dp
+                        )
+                )
 
                 Button(onClick = { },
                     modifier = Modifier
@@ -234,7 +266,7 @@ fun SignUpScreen(){
                     shape = RoundedCornerShape(12.dp)
                 ) {
 
-                    Text(text = stringResource(id = R.string.sign_in),
+                    Text(text = stringResource(id = R.string.sign_up),
                         fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
                         fontSize = 16.sp,
                         color = Color.White)
@@ -260,7 +292,7 @@ fun SignUpScreen(){
                         modifier = Modifier.width(100.dp)
                     )
 
-                    Text(text = stringResource(R.string.sign_up),
+                    Text(text = stringResource(R.string.sign_in),
                         fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
                         fontSize = 16.sp,
                         textAlign = TextAlign.Center,
