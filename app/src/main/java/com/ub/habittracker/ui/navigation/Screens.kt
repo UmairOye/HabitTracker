@@ -1,0 +1,5 @@
+package com.ub.habittracker.ui.navigation
+
+enum class Screens {
+    LOGIN, SIGNUP
+}
