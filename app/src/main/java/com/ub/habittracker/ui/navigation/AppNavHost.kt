@@ -1,6 +1,4 @@
 package com.ub.habittracker.ui.navigation
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
@@ -8,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ub.habittracker.ui.theme.screens.credentialsScreen.login.LoginScreen
-import com.ub.habittracker.ui.theme.screens.credentialsScreen.signup.SignUpScreen
+import com.ub.habittracker.ui.screens.credentialsScreen.signup.SignUpScreen
 
 
 @Composable
@@ -55,7 +53,12 @@ fun AppNavHost(
                 )
 
             }) {
-            SignUpScreen()
+
+            SignUpScreen(
+                onBackPressed = {navController.popBackStack()},
+                onSignUpClicked = {route -> navController.navigate(route)},
+                onSignInClicked = {route -> navController.navigate(route)}
+            )
         }
     }
 }
