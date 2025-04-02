@@ -47,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ub.habittracker.R
+import com.ub.habittracker.ui.theme.composables.CheckBox
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
@@ -182,16 +183,11 @@ fun LoginScreen(){
                 Row (verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier
-                        .padding(top = 5.dp, start = 5.dp, end = 16.dp)
+                        .padding(top = 5.dp, start = 16.dp, end = 16.dp)
                         .fillMaxWidth()){
-                    Checkbox(checked = rememberMe, onCheckedChange = {
-                        isChecked -> rememberMe = isChecked
-                    }, modifier = Modifier.scale(.7f),
-                        colors = CheckboxDefaults.colors(
-                            uncheckedColor = colorResource(id = R.color.blue_color),
-                            checkedColor = colorResource(id = R.color.blue_color)
-                        ))
-
+                    CheckBox(modifier = Modifier, checked = rememberMe, onClick = {isChecked->
+                        rememberMe = isChecked
+                    })
                     Text(text = stringResource(R.string.remember_me),
                         color = Color.Black,
                         fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),

@@ -7,4 +7,5 @@
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="sign_in">Sign In</string>
     <string name="remember_me">Remember me</string>
+    <string name="checkbox_icon">checkbox_icon</string>
 </resources>
