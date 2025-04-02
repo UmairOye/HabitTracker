@@ -28,9 +28,9 @@ fun CheckBox(modifier: Modifier, checked: Boolean, onClick:(Boolean)-> Unit){
     val alpha: Float by animateFloatAsState(if (isChecked) 1f else 0.5f, label = "alpha")
 
     val drawableResId = if(isChecked){
-        R.drawable.checkbox_checked
+        R.drawable.checked
     }else{
-        R.drawable.checkbox_unchecked
+        R.drawable.unchecked
     }
 
     Image(painter = painterResource(id = drawableResId), contentDescription = stringResource(R.string.checkbox_icon),
