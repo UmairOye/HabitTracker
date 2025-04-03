@@ -17,4 +17,10 @@
     <string name="password_">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="else_already_have_an_account">else\nAlready have an account?</string>
+    <string name="email_or_password_is_incorrect">Email or Password is incorrect!</string>
+    <string name="email_or_password_field_is_empty">Email or Password field is empty</string>
+    <string name="email_format_is_invalid">Email format is invalid</string>
+    <string name="all_fields_must_be_filled">All fields must be filled.</string>
+    <string name="password_and_confirm_password_must_be_same">Password and Confirm Password must be same</string>
+    <string name="user_registered_successfully">User registered successfully!</string>
 </resources>

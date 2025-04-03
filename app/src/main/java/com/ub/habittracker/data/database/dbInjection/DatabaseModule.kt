@@ -30,4 +30,8 @@ object DatabaseModule {
         return implementation
     }
 
+    @Provides
+    @Singleton
+    fun provideUserDao(habitTrackerDb: HabitTrackerDb) = habitTrackerDb.userDao()
+
 }

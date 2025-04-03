@@ -12,7 +12,8 @@ class UserRepositoryImplementation @Inject constructor(private val userDao: User
         userDao.insertUser(entity)
     }
 
-    override suspend fun isUserExist(userName: String, email: String): UserEntity = withContext(Dispatchers.IO){
-        return@withContext userDao.isUserExist(userName, email)
+    override suspend fun isUserExists(email: String, password: String): Boolean  = withContext(Dispatchers.IO){
+        return@withContext userDao.isUserExists(email, password) > 0
     }
+
 }
