@@ -1,4 +1,5 @@
 package com.ub.habittracker.ui.navigation
+
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
@@ -7,15 +8,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ub.habittracker.ui.theme.screens.credentialsScreen.login.LoginScreen
 import com.ub.habittracker.ui.screens.credentialsScreen.signup.SignUpScreen
+import com.ub.habittracker.ui.screens.dashboardScreen.home.HomeScreen
 
 
 @Composable
 fun AppNavHost(
-    navController: NavHostController
+    navController: NavHostController,
+    startRoute: String = NavigationItems.LOGIN.route
 ) {
 
 
-    NavHost(navController = navController, startDestination = NavigationItems.LOGIN.route) {
+    NavHost(navController = navController, startDestination = startRoute) {
         composable(route = NavigationItems.LOGIN.route,
             enterTransition = {
                 slideIntoContainer(
@@ -33,8 +36,8 @@ fun AppNavHost(
 
             LoginScreen(
                 onBackPressed = {},
-                onSignInClicked = {route -> navController.navigate(route)},
-                onSignUpClicked = {route -> navController.navigate(route)}
+                onSignInClicked = { route -> navController.navigate(route) },
+                onSignUpClicked = { route -> navController.navigate(route) }
             )
         }
 
@@ -55,10 +58,28 @@ fun AppNavHost(
             }) {
 
             SignUpScreen(
-                onBackPressed = {navController.popBackStack()},
-                onSignUpClicked = {route -> navController.navigate(route)},
-                onSignInClicked = {route -> navController.navigate(route)}
+                onBackPressed = { navController.popBackStack() },
+                onSignUpClicked = { route -> navController.navigate(route) },
+                onSignInClicked = { route -> navController.navigate(route) }
             )
+        }
+
+
+        composable(route = NavigationItems.HOME.route,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(700)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(700)
+                )
+            }
+        ){
+            HomeScreen()
         }
     }
 }

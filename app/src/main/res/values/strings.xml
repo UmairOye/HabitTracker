@@ -23,4 +23,7 @@
     <string name="all_fields_must_be_filled">All fields must be filled.</string>
     <string name="password_and_confirm_password_must_be_same">Password and Confirm Password must be same</string>
     <string name="user_registered_successfully">User registered successfully!</string>
+    <string name="nothing_found">Oooooops, Nothing found</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
 </resources>
