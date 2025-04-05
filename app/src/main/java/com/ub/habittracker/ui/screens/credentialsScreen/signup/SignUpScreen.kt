@@ -66,15 +66,15 @@ import com.ub.habittracker.ui.theme.composables.BackButton
 
 @Composable
 fun SignUpScreen(
-    onSignUpClicked:(String) -> Unit,
-    onSignInClicked:(String) -> Unit,
-    onBackPressed:()-> Unit
-){
+    onSignUpClicked: (String) -> Unit,
+    onSignInClicked: (String) -> Unit,
+    onBackPressed: () -> Unit
+) {
 
     val snackBarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-    val viewModel : CredentialsViewModel = hiltViewModel()
+    val viewModel: CredentialsViewModel = hiltViewModel()
     val passwordVisible = remember { mutableStateOf(false) }
     val confirmPasswordVisible = remember { mutableStateOf(false) }
 
@@ -97,15 +97,19 @@ fun SignUpScreen(
 
     Scaffold(snackbarHost = { SnackbarHost(snackBarHostState) }) { innerPadding ->
 
-        Column(modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.bg_color)),
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(color = colorResource(id = R.color.bg_color)),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top) {
+            verticalArrangement = Arrangement.Top
+        ) {
 
-            BackButton(color = colorResource(id = R.color.blue_color),
-                heading = stringResource(R.string.sign_up)) {
+            BackButton(
+                color = colorResource(id = R.color.blue_color),
+                heading = stringResource(R.string.sign_up)
+            ) {
                 onBackPressed()
             }
 
@@ -125,25 +129,29 @@ fun SignUpScreen(
                     .wrapContentHeight()
             ) {
 
-                Text(text = stringResource(R.string.create_account),
+                Text(
+                    text = stringResource(R.string.create_account),
                     color = colorResource(id = R.color.blue_color),
                     fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
                     fontSize = 18.sp,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 25.dp),
-                    textAlign = TextAlign.Center)
+                    textAlign = TextAlign.Center
+                )
 
-                Text(text = stringResource(R.string.sign_up_to_create_new_account),
+                Text(
+                    text = stringResource(R.string.sign_up_to_create_new_account),
                     color = Color.Gray,
                     fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
                     fontSize = 12.sp,
                     modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center)
+                    textAlign = TextAlign.Center
+                )
 
 
-
-                TextField(value = name, onValueChange = {username -> name = username},
+                TextField(
+                    value = name, onValueChange = { username -> name = username },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.username),
@@ -159,7 +167,9 @@ fun SignUpScreen(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     ), singleLine = true, leadingIcon = {
-                        Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = stringResource(R.string.email_icon),
+                        Icon(
+                            imageVector = Icons.Filled.AccountCircle,
+                            contentDescription = stringResource(R.string.email_icon),
                             tint = colorResource(id = R.color.blue_color)
                         )
                     },
@@ -175,7 +185,8 @@ fun SignUpScreen(
                 )
 
 
-                TextField(value = emailValue, onValueChange = {email -> emailValue = email},
+                TextField(
+                    value = emailValue, onValueChange = { email -> emailValue = email },
                     placeholder = {
                         Text(
                             text = "xyz@gmail.com",
@@ -191,7 +202,9 @@ fun SignUpScreen(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     ), singleLine = true, leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Email, contentDescription = stringResource(R.string.email_icon),
+                        Icon(
+                            imageVector = Icons.Filled.Email,
+                            contentDescription = stringResource(R.string.email_icon),
                             tint = colorResource(id = R.color.blue_color)
                         )
                     },
@@ -208,7 +221,8 @@ fun SignUpScreen(
 
 
 
-                TextField(value = passwordValue, onValueChange = {password -> passwordValue = password},
+                TextField(
+                    value = passwordValue, onValueChange = { password -> passwordValue = password },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.password_),
@@ -224,7 +238,9 @@ fun SignUpScreen(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     ), singleLine = true, leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.lock),
+                        Icon(
+                            imageVector = Icons.Filled.Lock,
+                            contentDescription = stringResource(R.string.lock),
                             tint = colorResource(id = R.color.blue_color)
                         )
                     },
@@ -238,7 +254,8 @@ fun SignUpScreen(
                             stringResource(R.string.hide_password) else stringResource(R.string.show_password)
 
 
-                        Image(painter = painterResource(id = image), contentDescription = description,
+                        Image(painter = painterResource(id = image),
+                            contentDescription = description,
                             modifier = Modifier.clickable {
                                 passwordVisible.value = !passwordVisible.value
                             })
@@ -256,7 +273,9 @@ fun SignUpScreen(
                 )
 
 
-                TextField(value = confirmPassword, onValueChange = {password -> confirmPassword = password},
+                TextField(
+                    value = confirmPassword,
+                    onValueChange = { password -> confirmPassword = password },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.confirm_password),
@@ -271,8 +290,12 @@ fun SignUpScreen(
                         unfocusedContainerColor = colorResource(id = R.color.bg_color),
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
-                    ), singleLine = true, leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.lock),
+                    ),
+                    singleLine = true,
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Filled.Lock,
+                            contentDescription = stringResource(R.string.lock),
                             tint = colorResource(id = R.color.blue_color)
                         )
                     },
@@ -286,7 +309,8 @@ fun SignUpScreen(
                             stringResource(R.string.hide_password) else stringResource(R.string.show_password)
 
 
-                        Image(painter = painterResource(id = image), contentDescription = description,
+                        Image(painter = painterResource(id = image),
+                            contentDescription = description,
                             modifier = Modifier.clickable {
                                 confirmPasswordVisible.value = !confirmPasswordVisible.value
                             })
@@ -302,38 +326,48 @@ fun SignUpScreen(
                         )
                 )
 
-                Button(onClick = {
-                    
-                    if(emailValue.isEmpty() || name.isEmpty()
-                        || passwordValue.isEmpty() || confirmPassword.isEmpty()){
-                        
-                        coroutineScope.showSnackBar(
-                            snackBarHostState, context.getString(R.string.all_fields_must_be_filled))
-                        return@Button
-                    }else if(emailValue.isValidEmail().not()){
-                        coroutineScope.showSnackBar(
-                            snackBarHostState, context.getString(R.string.email_format_is_invalid))
-                        return@Button
-                    }else if(passwordValue != confirmPassword){
-                        coroutineScope.showSnackBar(
-                            snackBarHostState,
-                            context.getString(R.string.password_and_confirm_password_must_be_same))
-                        return@Button
-                    }else{
-                        val userModel =
-                            UserEntity(userName = name,
-                                email = emailValue,
-                                password = passwordValue)
-                        viewModel.insertUser(userModel)
-                        emailValue = ""
-                        passwordValue = ""
-                        confirmPassword = ""
-                        name = ""
-                        coroutineScope.showSnackBar(
-                            snackBarHostState,
-                            context.getString(R.string.user_registered_successfully))
-                    }
-                },
+                Button(
+                    onClick = {
+
+                        if (emailValue.isEmpty() || name.isEmpty()
+                            || passwordValue.isEmpty() || confirmPassword.isEmpty()
+                        ) {
+
+                            coroutineScope.showSnackBar(
+                                snackBarHostState,
+                                context.getString(R.string.all_fields_must_be_filled)
+                            )
+                            return@Button
+                        } else if (emailValue.isValidEmail().not()) {
+                            coroutineScope.showSnackBar(
+                                snackBarHostState,
+                                context.getString(R.string.email_format_is_invalid)
+                            )
+                            return@Button
+                        } else if (passwordValue != confirmPassword) {
+                            coroutineScope.showSnackBar(
+                                snackBarHostState,
+                                context.getString(R.string.password_and_confirm_password_must_be_same)
+                            )
+                            return@Button
+                        } else {
+                            val userModel =
+                                UserEntity(
+                                    userName = name,
+                                    email = emailValue,
+                                    password = passwordValue
+                                )
+                            viewModel.insertUser(userModel)
+                            emailValue = ""
+                            passwordValue = ""
+                            confirmPassword = ""
+                            name = ""
+                            coroutineScope.showSnackBar(
+                                snackBarHostState,
+                                context.getString(R.string.user_registered_successfully)
+                            )
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
@@ -351,15 +385,18 @@ fun SignUpScreen(
                     shape = RoundedCornerShape(12.dp)
                 ) {
 
-                    Text(text = stringResource(id = R.string.sign_up),
+                    Text(
+                        text = stringResource(id = R.string.sign_up),
                         fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
                         fontSize = 16.sp,
-                        color = Color.White)
+                        color = Color.White
+                    )
 
                 }
 
 
-                Text(text = stringResource(R.string.else_already_have_an_account),
+                Text(
+                    text = stringResource(R.string.else_already_have_an_account),
                     fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
                     fontSize = 12.sp,
                     modifier = Modifier.fillMaxWidth(),
@@ -368,11 +405,13 @@ fun SignUpScreen(
                 )
 
 
-                Row(verticalAlignment = Alignment.CenterVertically,
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .padding(vertical = 25.dp, horizontal = 16.dp)
-                        .fillMaxWidth()) {
+                        .fillMaxWidth()
+                ) {
                     HorizontalDivider(
                         modifier = Modifier.width(100.dp)
                     )

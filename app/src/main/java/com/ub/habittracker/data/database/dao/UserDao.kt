@@ -14,4 +14,7 @@ interface UserDao {
     @Query("SELECT COUNT(*) FROM tbl_users WHERE email = :email AND password = :password")
     fun isUserExists(email: String, password: String): Int
 
+    @Query("SELECT username FROM tbl_users WHERE email = :email LIMIT 1")
+    fun getUsernameByEmail(email: String): String?
+
 }

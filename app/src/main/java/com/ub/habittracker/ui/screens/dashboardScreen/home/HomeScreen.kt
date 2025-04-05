@@ -40,13 +40,24 @@ import com.ub.habittracker.ui.screens.dashboardScreen.home.viewModels.HomeViewMo
 @Preview(showSystemUi = true)
 fun HomeScreen() {
 
-    val homeViewModel : HomeViewModel = hiltViewModel()
+    val homeViewModel: HomeViewModel = hiltViewModel()
 
     BackHandler {
-        //nothing to do
+        // nothing to do
     }
 
-    Scaffold { innerPadding ->
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { },
+                containerColor = colorResource(id = R.color.card_color),
+                contentColor = colorResource(id = R.color.white),
+                elevation = FloatingActionButtonDefaults.elevation(2.dp)
+            ) {
+                Icon(Icons.Filled.Add, stringResource(R.string.small_floating_action_button))
+            }
+        }
+    ) { innerPadding ->
 
         Column(
             modifier = Modifier
@@ -81,24 +92,14 @@ fun HomeScreen() {
                     .fillMaxWidth()
             )
 
-
-            LazyRow(modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 35.dp, start = 12.dp,
-                    end = 16.dp
-                )) {
-                items(homeViewModel.makeDateAndDayList()){ items->
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 35.dp, start = 12.dp, end = 16.dp)
+            ) {
+                items(homeViewModel.makeDateAndDayList()) { items ->
                     WeeklyItems(items)
                 }
-            }
-
-
-            FloatingActionButton(onClick = { },
-                containerColor = colorResource(id = R.color.card_color),
-                contentColor = colorResource(id = R.color.white),
-                elevation = FloatingActionButtonDefaults.elevation(2.dp),) {
-                Icon(Icons.Filled.Add, stringResource(R.string.small_floating_action_button))
             }
         }
     }

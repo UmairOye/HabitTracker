@@ -1,31 +1,30 @@
 package com.ub.habittracker.ui.screens.dashboardScreen.home.viewModels
-
-import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ub.habittracker.domain.models.DateAndDayModel
+import com.ub.habittracker.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(@ApplicationContext context: Context): ViewModel() {
+class HomeViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
+    private val _userName: MutableStateFlow<String?> = MutableStateFlow("")
+    val userName = _userName.asStateFlow()
 
-
-    fun makeDateAndDayList(): List<DateAndDayModel> {
-        val list = mutableListOf<DateAndDayModel>().apply {
-            add(DateAndDayModel("Mon", "05"))
-            add(DateAndDayModel("Tue", "06"))
-            add(DateAndDayModel("Wed", "07"))
-            add(DateAndDayModel("Thu", "08"))
-            add(DateAndDayModel("Fri", "09"))
-            add(DateAndDayModel("Sat", "10"))
-            add(DateAndDayModel("Sun", "11"))
-            add(DateAndDayModel("Mon", "12"))
-            add(DateAndDayModel("Fri", "13"))
-            add(DateAndDayModel("Sat", "14"))
-        }
-
-        return list
+    fun makeDateAndDayList(): List<DateAndDayModel>{
+        return userRepository.makeDateAndDayList()
     }
+
+
+    fun getUserName(email: String){
+        viewModelScope.launch {
+            _userName.value = userRepository.getUsernameByEmail(email)
+
+        }
+    }
+
 
 }
