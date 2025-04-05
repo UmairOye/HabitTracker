@@ -1,6 +1,5 @@
 package com.ub.habittracker.ui.theme.screens.credentialsScreen.login
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -72,6 +71,7 @@ import com.ub.habittracker.domain.utils.isValidEmail
 import com.ub.habittracker.domain.utils.showSnackBar
 import com.ub.habittracker.ui.navigation.NavigationItems
 import com.ub.habittracker.ui.screens.credentialsScreen.viewModel.CredentialsViewModel
+import com.ub.habittracker.ui.screens.dashboardScreen.home.viewModels.HomeViewModel
 import com.ub.habittracker.ui.theme.composables.CheckBox
 import kotlinx.coroutines.launch
 
@@ -81,20 +81,10 @@ fun LoginScreen(
     onSignUpClicked: (String) -> Unit,
     onSignInClicked: (String) -> Unit
 ) {
-    var emailValue by remember {
-        mutableStateOf("")
-    }
-
+    var emailValue by remember { mutableStateOf("") }
     val passwordVisible = remember { mutableStateOf(false) }
-
-
-    var passwordValue by remember {
-        mutableStateOf("")
-    }
-
-    var rememberMe by remember {
-        mutableStateOf(false)
-    }
+    var passwordValue by remember { mutableStateOf("") }
+    var rememberMe by remember { mutableStateOf(false) }
 
     val userViewModel: CredentialsViewModel = hiltViewModel()
     val userExist = userViewModel.userExist.collectAsState()
@@ -110,7 +100,7 @@ fun LoginScreen(
             is RequestState.Success -> {
                 val isUserExist = state.data
                 if (isUserExist) {
-                    onSignInClicked(NavigationItems.HOME.route)
+                    onSignInClicked(NavigationItems.HOME.route+"/$emailValue")
                 } else {
                     coroutineScope.showSnackBar(
                         snackBarHostState,
@@ -330,13 +320,10 @@ fun LoginScreen(
                                 RequestState.Loading -> {}
                                 is RequestState.Success -> {
 
-                                    val isUserExist =
-                                        (userExist.value as RequestState.Success<Boolean>).data
-                                    Utils.logCall(message = "callerLog: -- success -- $isUserExist")
-
+                                    val isUserExist = (userExist.value as RequestState.Success<Boolean>).data
                                     when (isUserExist) {
                                         true -> {
-                                            onSignInClicked(NavigationItems.HOME.route)
+                                            onSignInClicked(NavigationItems.HOME.route+"/$emailValue")
                                         }
 
                                         false -> {

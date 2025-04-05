@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             HabitTrackerTheme {
 
                 val startRoute = if (SharedPref.getBool(REMEMBER_ME, defaultValue = false)) {
-                    NavigationItems.HOME.route
+                    NavigationItems.HOME.route+"/"
                 } else {
                     NavigationItems.LOGIN.route
                 }

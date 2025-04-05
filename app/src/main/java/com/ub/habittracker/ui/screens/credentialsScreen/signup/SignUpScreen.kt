@@ -366,6 +366,7 @@ fun SignUpScreen(
                                 snackBarHostState,
                                 context.getString(R.string.user_registered_successfully)
                             )
+                            onSignInClicked(NavigationItems.LOGIN.route)
                         }
                     },
                     modifier = Modifier

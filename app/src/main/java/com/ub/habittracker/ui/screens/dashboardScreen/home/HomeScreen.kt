@@ -19,6 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -33,14 +37,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ub.habittracker.R
+import com.ub.habittracker.data.local.SharedPref
+import com.ub.habittracker.domain.models.RequestState
+import com.ub.habittracker.domain.utils.Constants
+import com.ub.habittracker.domain.utils.Constants.FIRST_TIME_USER
+import com.ub.habittracker.domain.utils.Utils
 import com.ub.habittracker.ui.screens.dashboardScreen.composables.WeeklyItems
 import com.ub.habittracker.ui.screens.dashboardScreen.home.viewModels.HomeViewModel
 
 @Composable
-@Preview(showSystemUi = true)
-fun HomeScreen() {
+//@Preview(showSystemUi = true)
+fun HomeScreen(
+    email: String
+) {
 
     val homeViewModel: HomeViewModel = hiltViewModel()
+    val userState by homeViewModel.userName.collectAsState()
+    var userName = remember {SharedPref.getString(Constants.USER_NAME,"")}
 
     BackHandler {
         // nothing to do
@@ -72,7 +85,7 @@ fun HomeScreen() {
                 text = "Good Morning",
                 textAlign = TextAlign.Start,
                 fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
-                fontSize = 20.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 style = TextStyle(MaterialTheme.colorScheme.onBackground),
                 modifier = Modifier
@@ -80,8 +93,27 @@ fun HomeScreen() {
                     .fillMaxWidth()
             )
 
+
+            LaunchedEffect(SharedPref.getBool(FIRST_TIME_USER, false).not()) {
+                homeViewModel.getUserName(email)
+                SharedPref.getBool(FIRST_TIME_USER, true)
+            }
+
+            when(userState){
+                is RequestState.Error -> {}
+                RequestState.Idle -> {}
+                RequestState.Loading -> {}
+                is RequestState.Success -> {
+                    val user = (userState as RequestState.Success).data
+                    if (user != null) {
+                        userName = user
+                    }
+                }
+            }
+
+
             Text(
-                text = "Umair",
+                text = userName,
                 textAlign = TextAlign.Start,
                 fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
                 fontSize = 24.sp,
