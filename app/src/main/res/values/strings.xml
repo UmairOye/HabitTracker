@@ -26,4 +26,5 @@
     <string name="nothing_found">Oooooops, Nothing found</string>
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
+    <string name="small_floating_action_button">Small floating action button.</string>
 </resources>
