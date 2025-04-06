@@ -11,5 +11,6 @@
     <color name="bg_color">#1D1D1D</color>
     <color name="card_color">#181818</color>
     <color name="text_color">#888888</color>
+    <color name="img_tint_color">#fff</color>
     <!--    <color name="text_color">#F5F5F5</color>-->
 </resources>

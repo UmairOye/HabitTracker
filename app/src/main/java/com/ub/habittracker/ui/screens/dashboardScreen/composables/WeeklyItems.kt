@@ -25,10 +25,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ub.habittracker.R
+import com.ub.habittracker.domain.models.CalendarUiModel
 import com.ub.habittracker.domain.models.DateAndDayModel
+import java.time.LocalDate
 
 @Composable
-fun WeeklyItems(dateAndDayModel: DateAndDayModel){
+fun WeeklyItems(date: CalendarUiModel.Date){
     Card(onClick = { },
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.card_color)
@@ -45,14 +47,14 @@ fun WeeklyItems(dateAndDayModel: DateAndDayModel){
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxSize()) {
 
-            Text(text = dateAndDayModel.date,
+            Text(text = date.day,
                 style = TextStyle(MaterialTheme.colorScheme.onBackground),
-                fontSize = 22.sp,
+                fontSize = 15.sp,
                 textAlign = TextAlign.Center,
                 fontFamily = FontFamily(Font(R.font.poppins_semibold, FontWeight.SemiBold))
             )
 
-            Text(text = dateAndDayModel.day,
+            Text(text = date.displayDay,
                 style = TextStyle(MaterialTheme.colorScheme.onBackground),
                 fontSize = 11.sp,
                 textAlign = TextAlign.Center,
@@ -66,6 +68,10 @@ fun WeeklyItems(dateAndDayModel: DateAndDayModel){
 @Preview
 @Composable
 fun PreviewWeeklyItems(){
-    val dateAndDayModel = DateAndDayModel("Mon", "01")
+    val dateAndDayModel = CalendarUiModel.Date(LocalDate.now(),
+        isSelected = false,
+        isToday = false,
+        displayDay = "20"
+    )
     WeeklyItems(dateAndDayModel)
 }
