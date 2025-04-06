@@ -21,11 +21,11 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
     private val _userName: MutableStateFlow<RequestState<String?>> = MutableStateFlow(RequestState.Idle)
     val userName = _userName.asStateFlow()
     private val dataSource = CalendarDataSource()
+    val monthFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val calendarUiModel = dataSource.getMonthData(
         monthDate = dataSource.today,
         lastSelectedDate = dataSource.today
     )
-    val monthFormatter = DateTimeFormatter.ofPattern("MMMM")
 
 
     fun getUserName(email: String){

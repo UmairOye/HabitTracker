@@ -1,21 +1,14 @@
 package com.ub.habittracker.ui.screens.dashboardScreen.home
 
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkHorizontally
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
-import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,10 +36,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -66,9 +57,8 @@ import com.ub.habittracker.ui.screens.dashboardScreen.composables.WeeklyItems
 import com.ub.habittracker.ui.screens.dashboardScreen.home.viewModels.HomeViewModel
 import java.time.LocalDate
 
-@OptIn(ExperimentalAnimationApi::class)
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-//@Preview(showSystemUi = true)
 fun HomeScreen(
     email: String
 ) {
@@ -77,8 +67,6 @@ fun HomeScreen(
     val userState by homeViewModel.userName.collectAsState()
     var userName = remember { SharedPref.getString(Constants.USER_NAME, "") }
     val currentMonth = remember { mutableStateOf(LocalDate.now()) }
-    var visible by remember { mutableStateOf(true) }
-    val density = LocalDensity.current
 
     BackHandler {
         // nothing to do
@@ -165,8 +153,6 @@ fun HomeScreen(
                     )
 
                 }
-
-
 
                 Icon(
                     imageVector = Icons.Default.Settings,
