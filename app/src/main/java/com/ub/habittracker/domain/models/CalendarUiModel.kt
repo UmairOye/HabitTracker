@@ -9,10 +9,10 @@ data class CalendarUiModel(
 ) {
 
     data class Date(
-        val date: LocalDate,
-        val isSelected: Boolean,
-        val isToday: Boolean,
-        val displayDay: String
+        val date: LocalDate = LocalDate.now(),
+        val isSelected: Boolean = false,
+        val isToday: Boolean = false,
+        val displayDay: String = ""
     ) {
         val day: String = date.format(DateTimeFormatter.ofPattern("E"))
     }

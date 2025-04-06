@@ -67,6 +67,7 @@ fun HomeScreen(
     val userState by homeViewModel.userName.collectAsState()
     var userName = remember { SharedPref.getString(Constants.USER_NAME, "") }
     val currentMonth = remember { mutableStateOf(LocalDate.now()) }
+    val calendarDates by homeViewModel.calendarDates.collectAsState()
 
     BackHandler {
         // nothing to do
@@ -96,6 +97,10 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
+
+            LaunchedEffect(currentMonth.value) {
+                homeViewModel.getCalendarList(currentMonth.value)
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -208,13 +213,21 @@ fun HomeScreen(
             }
 
 
-            LazyRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 5.dp, start = 12.dp, end = 16.dp)
-            ) {
-                items(homeViewModel.getCalendarList()) { date ->
-                    WeeklyItems(date)
+            when (calendarDates.isNotEmpty()) {
+                true -> {
+                    LazyRow(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 5.dp, start = 12.dp, end = 16.dp)
+                    ) {
+                        items(calendarDates) { date ->
+                            WeeklyItems(date)
+                        }
+                    }
+                }
+
+                false -> {
+
                 }
             }
         }
