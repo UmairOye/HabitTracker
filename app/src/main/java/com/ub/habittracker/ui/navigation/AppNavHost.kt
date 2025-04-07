@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.ub.habittracker.ui.screens.addHabitScreen.AddHabit
 import com.ub.habittracker.ui.theme.screens.credentialsScreen.login.LoginScreen
 import com.ub.habittracker.ui.screens.credentialsScreen.signup.SignUpScreen
 import com.ub.habittracker.ui.screens.dashboardScreen.home.HomeScreen
@@ -67,7 +68,7 @@ fun AppNavHost(
         }
 
 
-        composable(route = NavigationItems.HOME.route+ "/{user_email}",
+        composable(route = NavigationItems.HOME.route + "/{user_email}",
             arguments = listOf(navArgument("user_email") { type = NavType.StringType }),
             enterTransition = {
                 slideIntoContainer(
@@ -81,13 +82,33 @@ fun AppNavHost(
                     animationSpec = tween(700)
                 )
             }
-        ){
+        ) {
 
-            val user_email = it.arguments?.getString("user_email")?: ""
-
+            val user_email = it.arguments?.getString("user_email") ?: ""
             HomeScreen(
-                email = user_email
+                email = user_email,
+                onNavigateTo = { route -> navController.navigate(route) }
             )
+        }
+
+
+
+
+        composable(route = NavigationItems.ADD_HABITS.route,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(700)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(700)
+                )
+            }
+        ) {
+            AddHabit()
         }
     }
 }

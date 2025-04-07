@@ -4,4 +4,5 @@ sealed class NavigationItems(val route: String) {
     object LOGIN: NavigationItems(Screens.LOGIN.name)
     object SIGNUP: NavigationItems(Screens.SIGNUP.name)
     object HOME : NavigationItems(Screens.HOME.name)
+    object ADD_HABITS : NavigationItems(Screens.ADD_HABITS.name)
 }

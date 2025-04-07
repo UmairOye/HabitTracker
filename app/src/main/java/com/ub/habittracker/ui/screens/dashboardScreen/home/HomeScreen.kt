@@ -53,6 +53,7 @@ import com.ub.habittracker.data.local.SharedPref
 import com.ub.habittracker.domain.models.RequestState
 import com.ub.habittracker.domain.utils.Constants
 import com.ub.habittracker.domain.utils.Constants.FIRST_TIME_USER
+import com.ub.habittracker.ui.navigation.NavigationItems
 import com.ub.habittracker.ui.screens.dashboardScreen.composables.WeeklyItems
 import com.ub.habittracker.ui.screens.dashboardScreen.home.viewModels.HomeViewModel
 import java.time.LocalDate
@@ -60,7 +61,8 @@ import java.time.LocalDate
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeScreen(
-    email: String
+    email: String,
+    onNavigateTo:(String)-> Unit
 ) {
 
     val homeViewModel: HomeViewModel = hiltViewModel()
@@ -76,7 +78,9 @@ fun HomeScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { },
+                onClick = {
+                    onNavigateTo(NavigationItems.ADD_HABITS.route)
+                },
                 containerColor = colorResource(id = R.color.card_color),
                 contentColor = colorResource(id = R.color.white),
                 elevation = FloatingActionButtonDefaults.elevation(2.dp)
