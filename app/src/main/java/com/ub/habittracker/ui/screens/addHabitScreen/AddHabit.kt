@@ -41,6 +41,7 @@ import com.ub.habittracker.ui.theme.composables.BackButton
 fun AddHabit() {
 
     var addHabit by remember { mutableStateOf("") }
+    var habitDesc by remember { mutableStateOf("") }
 
     Scaffold { innerPadding ->
 
@@ -57,21 +58,17 @@ fun AddHabit() {
             }
 
 
-            Text(
-                text = stringResource(R.string.name),
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Medium,
-                color = colorResource(id = R.color.img_tint_color),
-                fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
-                textAlign = TextAlign.Start,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, top = 30.dp)
-            )
-
+            HabitTextView(text = stringResource(R.string.name))
             HabitTextFields(placeHolder = stringResource(R.string.describe_your_habit),
                 addHabit = addHabit,
                 onValueChanged = { addHabit = it })
+
+
+
+            HabitTextView(text = stringResource(R.string.description))
+            HabitTextFields(placeHolder = stringResource(R.string.describe_a_habit),
+                addHabit = habitDesc,
+                onValueChanged = { habitDesc = it })
         }
 
     }
@@ -110,4 +107,21 @@ fun HabitTextFields(placeHolder: String,
                 end = 16.dp, start = 16.dp
             )
     )
+}
+
+
+@Composable
+fun HabitTextView(text: String){
+    Text(
+        text = text,
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Medium,
+        color = colorResource(id = R.color.img_tint_color),
+        fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
+        textAlign = TextAlign.Start,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, top = 30.dp)
+    )
+
 }
