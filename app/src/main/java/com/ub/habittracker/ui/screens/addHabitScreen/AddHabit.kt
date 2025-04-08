@@ -62,52 +62,52 @@ fun AddHabit() {
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium,
                 color = colorResource(id = R.color.img_tint_color),
-                fontFamily = FontFamily(Font(R.font.roboto_semibold, FontWeight.SemiBold)),
+                fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, top = 30.dp)
             )
 
-            TextField(
-                value = addHabit, onValueChange = { newHabit -> addHabit = newHabit },
-                placeholder = {
-                    Text(
-                        text = stringResource(R.string.describe_your_habit),
-                        style = TextStyle(color = MaterialTheme.colorScheme.onBackground),
-                        fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
-                        color = Color.Gray
-                    )
-                },
-
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = colorResource(id = R.color.bg_color),
-                    unfocusedContainerColor = Color.Gray.copy(alpha = 0.3f),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                ), singleLine = true,
-                shape = RoundedCornerShape(13.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 16.dp,
-                        end = 16.dp, start = 16.dp
-                    )
-            )
-
-
-
-
-
-
-
-
-
-
+            HabitTextFields(placeHolder = stringResource(R.string.describe_your_habit),
+                addHabit = addHabit,
+                onValueChanged = { addHabit = it })
         }
 
     }
 
+}
+
+
+@Composable
+fun HabitTextFields(placeHolder: String,
+                    addHabit:String,
+                    onValueChanged:(String) -> Unit){
+    TextField(
+        value = addHabit, onValueChange = { onValueChanged(it)},
+        placeholder = {
+            Text(
+                text = placeHolder,
+                style = TextStyle(color = MaterialTheme.colorScheme.onBackground),
+                fontFamily = FontFamily(Font(R.font.roboto_regular, FontWeight.Normal)),
+                color = Color.Gray
+            )
+        },
+
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = colorResource(id = R.color.bg_color),
+            unfocusedContainerColor = Color.Gray.copy(alpha = 0.3f),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ), singleLine = true,
+        shape = RoundedCornerShape(13.dp),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 16.dp,
+                end = 16.dp, start = 16.dp
+            )
+    )
 }
