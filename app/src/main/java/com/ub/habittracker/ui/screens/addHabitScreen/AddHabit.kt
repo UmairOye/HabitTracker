@@ -82,7 +82,7 @@ fun AddHabit() {
 
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = colorResource(id = R.color.bg_color),
-                    unfocusedContainerColor = colorResource(id = R.color.bg_color),
+                    unfocusedContainerColor = Color.Gray.copy(alpha = 0.3f),
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 ), singleLine = true,
