@@ -34,6 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ub.habittracker.R
+import com.ub.habittracker.domain.models.HabitIntervals
+import com.ub.habittracker.ui.screens.addHabitScreen.composables.IntervalsDropDown
 import com.ub.habittracker.ui.theme.composables.BackButton
 
 @Preview(showSystemUi = true)
@@ -42,6 +44,7 @@ fun AddHabit() {
 
     var addHabit by remember { mutableStateOf("") }
     var habitDesc by remember { mutableStateOf("") }
+    val habitsList = HabitIntervals.entries.toTypedArray()
 
     Scaffold { innerPadding ->
 
@@ -69,6 +72,12 @@ fun AddHabit() {
             HabitTextFields(placeHolder = stringResource(R.string.describe_a_habit),
                 addHabit = habitDesc,
                 onValueChanged = { habitDesc = it })
+
+            HabitTextView(text = stringResource(R.string.intervals))
+
+            IntervalsDropDown(habitsList) { selectedPriority->
+            }
+
         }
 
     }
